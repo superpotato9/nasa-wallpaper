@@ -1,0 +1,19 @@
+import ctypes
+import os
+import time 
+import urllib.request
+import urllib.parse
+  
+
+while True:
+    x = urllib.request.urlopen('https://api.nasa.gov/planetary/apod?api_key=PJqXGerVcmvXM8fRJubafNk0CY2YVRSMFblm7pTn&thumbs=true')
+    pre = x.read()
+    nasa = eval(pre)
+      
+  
+    image = nasa['url']
+    urllib.request.urlretrieve(image, 'hello.jpg')
+    SPI_SETDESKWALLPAPER = 20 
+    ctypes.windll.user32.SystemParametersInfoA(SPI_SETDESKWALLPAPER, 0, b'hello.jpg', 3) 
+    print('background changed')
+    time.sleep(3600)
